@@ -1,0 +1,51 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.9.RELEASE' //spring boot version : start.spring.io 에서 선택한 버젼
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com' //start.spring.io 에서 설정했던 이름
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11' //JDK 11 버전을 의미
+
+repositories {
+	mavenCentral() // library 를 쉽게 다운로드 하기 위해 mavenCentral 이라고 하는 공개된 사이트에서 다운로드 받는다. // 필요하다면 다른 특정 사이트 url 을 넣을 수도 있다.
+}
+
+dependencies { //의존 관계
+	//DB 관련
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //jdbc, JdbcTemplate 다 포함한다.
+	//implementation 'org.springframework.boot:spring-boot-starter-jdbc' //jdbc 드라이버를 통해 Application Server 와 DB 를 연동한다.
+	runtimeOnly 'com.h2database:h2' // DB 와 붙을 때, database 에서 제공하는 Client 가 필요하다. 그것이 여기서는 h2database Client 이다.
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'//web project 선택
+	/*
+	spring-boot-starter-web
+		-spring-boot-starter-tomcat: 톰캣 (웹서버)
+		-spring-webmvc: 스프링 웹 MVC
+
+	spring-boot-starter(공통): 스프링 부트 + 스프링 코어 + 로깅
+		-spring-boot
+			-spring-core
+	spring-boot-starter-logging
+		-logback, slf4j
+	 */
+
+	//test 를 위한 test library JUnit 5
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	/*
+	테스트 라이브러리
+	spring-boot-starter-test
+		-junit: 테스트 프레임워크
+		-mockito: 목 라이브러리
+		-assertj: 테스트 코드를 좀 더 편하게 작성하게 도와주는 라이브러리
+		-spring-test: 스프링 통합 테스트 지원
+	 */
+}
+
+test {
+	useJUnitPlatform()
+}
