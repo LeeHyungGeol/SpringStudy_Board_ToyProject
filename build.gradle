@@ -8,6 +8,16 @@ group = 'com' //start.spring.io 에서 설정했던 이름
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11' //JDK 11 버전을 의미
 
+
+//lombok 설정 추가 시작
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+//lombok 설정 추가 끝
+
+
 repositories {
 	mavenCentral() // library 를 쉽게 다운로드 하기 위해 mavenCentral 이라고 하는 공개된 사이트에서 다운로드 받는다. // 필요하다면 다른 특정 사이트 url 을 넣을 수도 있다.
 }
@@ -18,10 +28,21 @@ dependencies { //의존 관계
 	//implementation 'org.springframework.boot:spring-boot-starter-jdbc' //jdbc 드라이버를 통해 Application Server 와 DB 를 연동한다.
 	runtimeOnly 'com.h2database:h2' // DB 와 붙을 때, database 에서 제공하는 Client 가 필요하다. 그것이 여기서는 h2database Client 이다.
 
+	//은 javax.inject.Provider 라는 JSR-330 자바 표준
+	implementation 'javax.inject:javax.inject:1'
+
+	//lombok 라이브러리 추가 시작
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	//lombok 라이브러리 추가 끝
+
 	//html 만드는 template engine
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'//web project 선택
+	//web project 선택
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	/*
 	spring-boot-starter-web
 		-spring-boot-starter-tomcat: 톰캣 (웹서버)
