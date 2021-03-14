@@ -18,6 +18,8 @@ dependencies { //의존 관계
 	//implementation 'org.springframework.boot:spring-boot-starter-jdbc' //jdbc 드라이버를 통해 Application Server 와 DB 를 연동한다.
 	runtimeOnly 'com.h2database:h2' // DB 와 붙을 때, database 에서 제공하는 Client 가 필요하다. 그것이 여기서는 h2database Client 이다.
 
+	//html 만드는 template engine
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'//web project 선택
 	/*
